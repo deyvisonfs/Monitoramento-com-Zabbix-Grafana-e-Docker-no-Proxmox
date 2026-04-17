@@ -121,32 +121,8 @@ Sua árvore de diretórios vai ficar assim:
     └── grafana_data/   (criada automaticamente para as configs do grafana)
 ```
 
-## ***3. Configurando o Zabbix Agent (Em outra máquina/VM)***
 
-Para monitorar outra máquina, você cria um arquivo separado nela:
-```Bash
-mkdir zabbix-agent && cd zabbix-agent
-nano docker-compose.yml
-# Código do Agent (Atenção aos comentários):
-```
-Código do Agent (Atenção aos comentários):
-```YAML
-services:
-  zabbix-agent:
-    image: zabbix/zabbix-agent2:latest
-    container_name: zabbix-agent
-    ports:
-      - "10050:10050"
-    privileged: true
-    environment:
-      # COLOQUE O IP DO SEU DEBIAN SERVER ABAIXO
-      - ZBX_SERVER_HOST=192.168.1.100  <-- MUDAR PARA O IP DO ZABBIX SERVER
-      # NOME QUE VAI APARECER NO PAINEL DO ZABBIX
-      - ZBX_HOSTNAME=Servidor-Proxmox-01
-    restart: always
-```
-
-## ***4. Integração Passo a Passo (Zabbix + Grafana)***
+## ***3. Integração Passo a Passo (Zabbix + Grafana)***
 
 Agora, com tudo rodando, vamos fazer os dois conversarem:
 
@@ -173,3 +149,56 @@ Configuração da URL: http://zabbix-web:8080/api_jsonrpc.php (O Grafana usa o n
 Zabbix API Details: Coloque o usuário (grafana_user) e a senha que você criou no passo anterior.
 
 Clique em Save & Test.
+
+
+## ***4. Configurando o Zabbix Agent (Em outra máquina/VM)***
+
+Para monitorar outra máquina, você cria um arquivo separado nela:
+```Bash
+mkdir zabbix-agent && cd zabbix-agent
+nano docker-compose.yml
+# Código do Agent (Atenção aos comentários):
+```
+Código do Agent (Atenção aos comentários):
+```YAML
+services:
+  zabbix-agent:
+    image: zabbix/zabbix-agent2:latest
+    container_name: zabbix-agent
+    ports:
+      - "10050:10050"
+    privileged: true
+    environment:
+      # COLOQUE O IP DO SEU DEBIAN SERVER ABAIXO
+      - ZBX_SERVER_HOST=192.168.1.100  <-- MUDAR PARA O IP DO ZABBIX SERVER
+      # NOME QUE VAI APARECER NO PAINEL DO ZABBIX
+      - ZBX_HOSTNAME=Servidor-Proxmox-01
+    restart: always
+```
+
+
+## ***5.Como integrar o Agent no Painel do Zabbix Server***
+
+Após subir o container do Agent, siga estes passos no navegador:
+
+Acesse o Zabbix Web: Vá em Data Collection -> Hosts.
+
+Criar Novo Host: Clique no botão Create host (canto superior direito).
+
+Configurações Principais:
+
+Host name: Coloque exatamente o mesmo nome que você definiu no arquivo do Docker (ZBX_HOSTNAME). Ex: Servidor-Proxmox-01.
+
+Templates: Procure e selecione Linux by Zabbix agent.
+
+Host groups: Escolha um grupo (ex: Linux servers).
+
+Interfaces:
+
+Clique em Add -> Agent.
+
+IP address: Coloque o IP da máquina onde o Agent está rodando.
+
+Port: 10050 (padrão).
+
+Finalizar: Clique em Add.
