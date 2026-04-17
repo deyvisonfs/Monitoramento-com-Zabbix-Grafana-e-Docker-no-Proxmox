@@ -110,30 +110,14 @@ Para subir tudo:
 docker compose up -d
 ```
 
-Passo Final no Painel do Zabbix:
-Depois de dar o docker compose up -d, você precisa ativar o monitoramento no navegador:
 
-No Zabbix (http://IP:8080):
-
-Vá em Data Collection -> Hosts.
-
-Você verá um host chamado "Zabbix server" que já vem criado por padrão.
-
-Clique nele e mude o Interfaces -> IP address para 127.0.0.1.
-
-Certifique-se que o Template Linux by Zabbix agent está selecionado.
-
-Clique em Update.
-
-
-
-Como conferir se deu certo?
+## Como conferir se deu certo?
 Digite:
 
 ```Bash
 docker ps
 ```
-Você deverá ver 4 containers na lista: zabbix-server, zabbix-web, zabbix-db e grafana.
+Você deverá ver 5 containers na lista: zabbix-server, zabbix-web, zabbix-db, zabbix-agent-self e grafana.
 
 Resumo da sua estrutura de pastas:
 Sua árvore de diretórios vai ficar assim:
@@ -141,11 +125,27 @@ Sua árvore de diretórios vai ficar assim:
 ```Plaintext
 /home/seu-usuario/
 └── zabbix-monitor/
-    ├── .env
-    ├── docker-compose.yml
-    ├── zabbix_db/      (criada automaticamente para os dados do banco)
-    └── grafana_data/   (criada automaticamente para as configs do grafana)
+    ├── .env                 (Suas senhas e configurações de Timezone)
+    ├── docker-compose.yml   (O arquivo com os 5 serviços configurados)
+    ├── zabbix_db/           (criada automaticamente para os dados do banco)
+    └── grafana_data/        (criada automaticamente para as configs do grafana)
 ```
+
+## Passo Final no Painel do Zabbix:
+Depois de dar o docker ```compose up -d```, você precisa ativar o monitoramento no navegador:
+
+No Zabbix (http://IP:8080):
+
+Vá em Data Collection -> Hosts.
+
+Você verá um host chamado "Zabbix server" que já vem criado por padrão.
+
+Clique nele e mude o Interfaces -> IP address para ```127.0.0.1```.
+
+Certifique-se que o ***Template*** ```Linux by Zabbix agent``` está selecionado.
+
+Clique em Update.
+
 
 
 ## ***3. Integração Passo a Passo (Zabbix + Grafana)***
