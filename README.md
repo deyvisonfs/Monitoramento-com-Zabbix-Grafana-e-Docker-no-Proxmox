@@ -1,10 +1,11 @@
 # Monitoramento-com-Zabbix-Grafana-e-Docker-no-Proxmox
 Este projeto demonstra a implementação de uma infraestrutura de monitoramento completa, utilizando Docker Compose sobre uma instância Debian Server virtualizada em um ambiente Proxmox VE.
 
-Zabbix de Pregioçoso!
+Zabbix/Grafana de Preguiçoso para iniciantes!
 
-1. Preparação da VM no Proxmox
-Antes do Docker, você precisa da "casa" (a VM).
+## ***1. Preparação da VM no Proxmox***
+
+Antes de tudo, precisamos do Docker instalado. No terminal do seu servidor:
 
 No seu Proxmox, clique em Create VM.
 
@@ -20,7 +21,8 @@ Rede: Modo Bridge (para a VM ter um IP próprio na sua rede).
 
 Instale o Debian 12 Server (instalação padrão, sem interface gráfica, apenas "SSH Server" e "Standard System Utilities").
 
-2. Passo a Passo no Terminal do Debian
+## ***2. Passo a Passo no Terminal do Debian***
+
 Após logar no seu Debian via terminal ou console do Proxmox:
 
 A. Instalar o Docker
@@ -100,9 +102,33 @@ services:
     restart: always
 ```
 
-Para subir tudo: ```docker compose up -d```
+Para subir tudo:
+```Bash
+docker compose up -d
+```
 
-3. Configurando o Zabbix Agent (Em outra máquina/VM)
+Como conferir se deu certo?
+Digite:
+
+```Bash
+docker ps
+```
+Você deverá ver 4 containers na lista: zabbix-server, zabbix-web, zabbix-db e grafana.
+
+Resumo da sua estrutura de pastas:
+Sua árvore de diretórios vai ficar assim:
+
+```Plaintext
+/home/seu-usuario/
+└── zabbix-monitor/
+    ├── .env
+    ├── docker-compose.yml
+    ├── zabbix_db/      (criada automaticamente para os dados do banco)
+    └── grafana_data/   (criada automaticamente para as configs do grafana)
+```
+
+## ***3. Configurando o Zabbix Agent (Em outra máquina/VM)***
+
 Para monitorar outra máquina, você cria um arquivo separado nela:
 ```Bash
 mkdir zabbix-agent && cd zabbix-agent
@@ -126,7 +152,8 @@ services:
     restart: always
 ```
 
-4. Integração Passo a Passo (Zabbix + Grafana)
+## ***4. Integração Passo a Passo (Zabbix + Grafana)***
+
 Agora, com tudo rodando, vamos fazer os dois conversarem:
 
 No Zabbix (http://IP:8080):
