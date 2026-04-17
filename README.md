@@ -1,25 +1,19 @@
 # Monitoramento-com-Zabbix-Grafana-e-Docker-no-Proxmox
 Este projeto demonstra a implementação de uma infraestrutura de monitoramento completa, utilizando Docker Compose sobre uma instância Debian Server virtualizada em um ambiente Proxmox VE.
 
-Zabbix/Grafana de Preguiçoso para iniciantes!
+> **Nota:** Guia prático focado em iniciantes que desejam rapidez e organização.
+
 
 ## ***1. Preparação da VM no Proxmox***
 
-Antes de tudo, precisamos do Docker instalado. No terminal do seu servidor:
+Antes de configurar o software, precisamos preparar o hardware virtual. No seu painel Proxmox, clique em **Create VM** e siga as recomendações:
 
-No seu Proxmox, clique em Create VM.
-
-Recursos Recomendados:
-
-CPU: 2 vCPUs (Tipo: 'host' para melhor performance).
-
-RAM: 4GB (Zabbix + Grafana + DB consomem memória).
-
-Disco: 32GB (SSD preferencialmente).
-
-Rede: Modo Bridge (para a VM ter um IP próprio na sua rede).
-
-Instale o Debian 12 Server (instalação padrão, sem interface gráfica, apenas "SSH Server" e "Standard System Utilities").
+### ⚙️ Recursos Recomendados:
+* **SO:** Debian 12 Server (instalação padrão, sem interface gráfica, apenas "SSH Server")
+* **CPU:** 2 vCPUs (Tipo: `host` para melhor performance).
+* **RAM:** 4GB (Mínimo recomendado para Zabbix + Grafana + Banco de Dados).
+* **Disco:** 32GB (SSD preferencialmente).
+* **Rede:** Modo **Bridge** (para que o servidor tenha um IP acessível na sua rede).
 
 ## ***2. Passo a Passo no Terminal do Debian***
 
