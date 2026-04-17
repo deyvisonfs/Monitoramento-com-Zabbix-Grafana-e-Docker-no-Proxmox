@@ -127,7 +127,7 @@ Para monitorar outra máquina, você cria um arquivo separado nela:
 ```Bash
 mkdir zabbix-agent && cd zabbix-agent
 nano docker-compose.yml
-Código do Agent (Atenção aos comentários):
+# Código do Agent (Atenção aos comentários):
 ```
 Código do Agent (Atenção aos comentários):
 ```YAML
