@@ -4,7 +4,8 @@ Este documento serve como um guia rápido para resolver erros comuns e realizar 
 
 
 A alternativa para não precisar sair (Logoff):
-Se você estiver no terminal e não quiser fechar e abrir de novo, existe um "truque" para atualizar o grupo na hora:
+
+Se você estiver no terminal e não quiser fechar e abrir de novo, existe um macete para atualizar o grupo na hora:
 
 ```Bash
 newgrp docker
@@ -12,12 +13,12 @@ newgrp docker
 O comando vai forçar o terminal a reconhecer que você agora faz parte do grupo docker sem precisar deslogar da máquina.
 
 
-Quando você mudar alguma configuração dentro do arquivo zabbix_server.conf direto no Linux (sem Docker), normalmente você vai usar o comando:
+Quando você mudar alguma configuração dentro do ```arquivo zabbix_server.conf``` direto no Linux (sem Docker), normalmente você vai usar o comando:
 ```bash
 systemctl restart zabbix-server
 ```
 
-Mas No nosso caso, como estamos usando Docker, se você mudar algo no docker-compose.yml, o comando correto é:
+Mas No nosso caso, como estamos usando Docker, se você mudar algo no ```docker-compose.yml```, o comando correto é:
 ```Bash
 docker compose up -d --force-recreate
 ```
