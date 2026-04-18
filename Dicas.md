@@ -80,3 +80,13 @@ Caso o Zabbix Server não encontre o agente (erro de cannot resolve), certifique
     Port: 10050
 ```
 <img width="1361" height="563" alt="DNS" src="https://github.com/user-attachments/assets/1ffcaa65-709d-4704-b287-4ed589f7a5b1" />
+
+
+# Firewall do Debian
+
+Se o navegador não abrir a página, garanta que as portas estejam liberadas no sistema operacional:
+```Bash
+ufw allow 80/tcp    # Porta do Zabbix Web
+ufw allow 3000/tcp  # Porta do Grafana
+ufw allow 10051/tcp # Porta do Zabbix Server
+```
