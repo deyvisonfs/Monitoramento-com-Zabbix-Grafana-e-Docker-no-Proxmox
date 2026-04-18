@@ -97,14 +97,17 @@ services:
     restart: always
 
   zabbix-agent:
-    image: zabbix/zabbix-agent2:latest
-    container_name: zabbix-agent-self
-    privileged: true
-    network_mode: host # IMPORTANTE: permite monitorar o host real onde o Docker está
-    environment:
-      - ZBX_SERVER_HOST=127.0.0.1
-      - ZBX_HOSTNAME=Zabbix-Server-Principal
-    restart: always
+  image: zabbix/zabbix-agent2:latest
+  container_name: zabbix-agent-self
+  privileged: true
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+  ports:
+    - "10050:10050"
+  environment:
+    - ZBX_SERVER_HOST=zabbix-server
+    - ZBX_HOSTNAME=Zabbix-Server
+  restart: always
 
   grafana:
     image: grafana/grafana-oss:latest
