@@ -60,17 +60,17 @@ docker exec -u 0 -it zabbix-agent-self chmod 666 /var/run/docker.sock
 **Integração Zabbix x Grafana (Usuário de API)**
 
 No Frontend do Zabbix (http://seu-ip), crie o usuário para a integração:
-
+```
     Username: grafana_user
 
     Group: No access to the frontend (ou Zabbix administrators)
 
     Permissions: Defina o papel como Admin Role.
-
+```
 **Ajuste de Rede Docker (DNS Resolver)** # imagem de como deve ficar
 
 Caso o Zabbix Server não encontre o agente (erro de cannot resolve), certifique-se de configurar o Host no Zabbix Web desta forma:
-
+```
     Interface: Agent
 
     Connect to: Selecione DNS
@@ -78,5 +78,5 @@ Caso o Zabbix Server não encontre o agente (erro de cannot resolve), certifique
     DNS name: zabbix-agent-self
 
     Port: 10050
-
-    <img width="1361" height="563" alt="DNS" src="https://github.com/user-attachments/assets/1ffcaa65-709d-4704-b287-4ed589f7a5b1" />
+```
+<img width="1361" height="563" alt="DNS" src="https://github.com/user-attachments/assets/1ffcaa65-709d-4704-b287-4ed589f7a5b1" />
