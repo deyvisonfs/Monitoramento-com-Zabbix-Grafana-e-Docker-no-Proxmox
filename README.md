@@ -106,7 +106,7 @@ services:
     - "10050:10050"
   environment:
     - ZBX_SERVER_HOST=zabbix-server
-    - ZBX_HOSTNAME=Zabbix-Server
+    - ZBX_HOSTNAME=zabbix-Server
   restart: always
 
   grafana:
