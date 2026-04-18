@@ -21,6 +21,7 @@ Após logar no seu Debian via terminal ou console do Proxmox:
 A. Instalar o Docker
 ```Bash
 sudo apt update && sudo apt upgrade -y
+apt install curl ca-certificates -y # (em caso de pedir a instalação do curl)
 curl -fsSL https://get.docker.com | sh
 sudo usermod -aG docker $USER
 # SAIA DO TERMINAL (EXIT) E ENTRE DE NOVO PARA AS PERMISSÕES VALEREM
